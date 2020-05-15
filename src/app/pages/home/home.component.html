@@ -1,0 +1,75 @@
+<ActionBar>
+  <NavigationButton
+    icon="font://menu"
+    class="material-icons text-icon-hack-base"
+    (tap)="onDrawerButtonTap()"
+  ></NavigationButton>
+  <Label class="text-actionbar pull-left" text="My pace notes"></Label>
+  <ActionItem
+    (tap)="onSort()"
+    icon="font://sort"
+    class="material-icons text-icon-hack-base"
+  ></ActionItem>
+</ActionBar>
+
+<!-- content -->
+<StackLayout orientation="vertical">
+  <!-- search bar -->
+  <GridLayout
+    columns="auto,*,auto"
+    class="bg-gray-800 rounded-sm m-x-8 m-y-16"
+    height="48"
+  >
+    <Button
+      column="0"
+      text="search"
+      class="icon-button material-icons text-icon-base text-gray-300"
+    ></Button>
+    <TextField column="1" class="m-0 no-border cursor-gray-300"></TextField>
+    <Button
+      column="2"
+      text="backspace"
+      class="icon-button material-icons text-icon-base text-gray-300"
+    ></Button>
+  </GridLayout>
+
+  <PaceNotesSet
+    *ngFor="let paceNotesSet of paceNotesSets"
+    [paceNotesSet]="paceNotesSet"
+  ></PaceNotesSet>
+</StackLayout>
+
+<!-- no content-->
+<StackLayout orientation="horizontal">
+  <GridLayout rows="auto, auto" verticalAlignment="center">
+    <Label
+      row="0"
+      class="h3 text-center w-4/5"
+      text="You don't have any pace notes"
+    ></Label>
+    <Label
+      row="1"
+      class="body text-center w-4/5"
+      text="Press the “+” button to create your first one or import existing ones from the left menu"
+      textWrap="true"
+    ></Label>
+  </GridLayout>
+</StackLayout>
+
+<!-- layout for positionning fab-->
+<GridLayout rows="*, auto">
+  <Button
+    text="add"
+    class="fab fab__right text-icon-base bg-green-light text-gray-900 material-icons"
+    horizontalAlignment="right"
+    row="1"
+    (tap)="onAdd()"
+  ></Button>
+  <Button
+    text="accessibility_new"
+    class="fab fab__left text-icon-base bg-green-light text-gray-900 material-icons"
+    horizontalAlignment="left"
+    row="1"
+    (tap)="onButtonLoad()"
+  ></Button>
+</GridLayout>

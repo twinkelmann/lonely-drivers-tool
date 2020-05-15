@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!-- manually changed https://stackoverflow.com/questions/36852155/how-to-change-textview-bottom-accent-colour-on-android-nativescript-app/36854959#36854959 -->
+	<color name="ns_accent">#92cbc5</color>
+</resources>
