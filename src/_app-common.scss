@@ -68,6 +68,10 @@ GridLayout.bg-gray-800,
   background-color: #424242;
 }
 
+.bg-gray-900 {
+  background-color: #212121;
+}
+
 .cursor-gray-300 {
   // text-cursor-drawable: '@null';
 }
@@ -83,4 +87,7 @@ Button.icon-button {
 
 .no-border {
   border-width: 0;
+}
+.pt-56 {
+  padding-top: 80;
 }

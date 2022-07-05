@@ -89,6 +89,12 @@ export enum pnPaceNotesSetsOrder {
   MOST_DIFFICULT,
 }
 
+const PI_OVER_180 = Math.PI / 180
+
+function degreeToRadians(degrees) {
+  return degrees * PI_OVER_180
+}
+
 /**
  * Calculates the distance in km between two cardinal points (from https://www.npmjs.com/package/distance-from)
  */
@@ -100,17 +106,17 @@ function distanceInKm(coords1: pnCoordinates, coords2: pnCoordinates) {
   const sine = (num) => Math.sin(num / 2)
   const cos = (num) => Math.cos(num)
   const radius = 6371
-  const φ1 = this.degreeToRadians(coords1[0])
-  const λ1 = this.degreeToRadians(coords1[1])
-  const φ2 = this.degreeToRadians(coords2[0])
-  const λ2 = this.degreeToRadians(coords2[1])
+  const φ1 = degreeToRadians(coords1[0])
+  const λ1 = degreeToRadians(coords1[1])
+  const φ2 = degreeToRadians(coords2[0])
+  const λ2 = degreeToRadians(coords2[1])
   const Δφ = φ2 - φ1
   const Δλ = λ2 - λ1
   const a = sine(Δφ) * sine(Δφ) + cos(φ1) * cos(φ2) * Math.pow(sine(Δλ), 2)
   return 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)) * radius
 }
 
-class PaceNotesSetsUtils {
+export class PaceNotesSetsUtils {
   /**
    * Get the pace note's starting coordinates
    * @returns null if the pace notes don't have any notes
@@ -134,7 +140,7 @@ class PaceNotesSetsUtils {
       )
     }
 
-    return distance
+    return parseFloat(distance.toPrecision(1))
   }
 
   static timesBest(paceNotesSet: pnPaceNotesSet) {
@@ -224,13 +230,13 @@ export class PaceNotesService {
 
   constructor() {
     this.init()
-    console.log('was init')
+    console.log('PaceNotesService was init')
   }
 
   public init() {
     this._readFromSettings()
 
-    console.log('loaded ', this._paceNotesSets.length, 'from disk')
+    console.log('loaded', this._paceNotesSets.length, 'pace notes from disk')
 
     if (this._paceNotesSets.length === 0) {
       this._seed()

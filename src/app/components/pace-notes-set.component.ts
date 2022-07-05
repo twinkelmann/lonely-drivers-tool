@@ -1,7 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core'
 import * as app from 'tns-core-modules/application'
 import { Router } from '@angular/router'
-import { pnPaceNotesSet } from '../services/pacenotes.service'
+import {
+  pnPaceNotesSet,
+  PaceNotesSetsUtils,
+} from '../services/pacenotes.service'
+import { NominatimService } from '../services/nominatim.service'
 
 @Component({
   selector: 'PaceNotesSet',
@@ -11,7 +15,24 @@ export class PaceNotesSetComponent implements OnInit {
   @Input()
   public paceNotesSet: pnPaceNotesSet
 
-  constructor() {}
+  public nominatimService: NominatimService
 
-  ngOnInit(): void {}
+  public locationName: string = 'Unknown'
+  public numNotes: number = 0
+  public numKm: number = 0
+
+  constructor(nominatimService: NominatimService) {
+    this.nominatimService = nominatimService
+  }
+
+  ngOnInit(): void {
+    // setup computed values
+    this.nominatimService
+      .getLocation(PaceNotesSetsUtils.coordinates(this.paceNotesSet))
+      .then((data) => {
+        this.locationName = data.name
+      })
+    this.numNotes = this.paceNotesSet.notes.length
+    this.numKm = PaceNotesSetsUtils.distance(this.paceNotesSet)
+  }
 }

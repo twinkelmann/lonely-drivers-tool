@@ -1,4 +1,23 @@
 <!-- content -->
-<StackLayout orientation="vertical">
+<StackLayout orientation="vertical" class="bg-gray-900">
   <Label [text]="paceNotesSet.name"></Label>
+  <Label
+    *ngIf="paceNotesSet.description"
+    [text]="paceNotesSet.description"
+  ></Label>
+  <Label [text]="locationName"></Label>
+
+  <Label text="{{ numNotes }}x"></Label>
+  <Label class="material-icons" text="flag"></Label>
+
+  <Label text="~{{ numKm }} km"></Label>
+
+  <Label class="material-icons" text="directions_car"></Label>
+  <Label class="material-icons" text="directions_car"></Label>
+  <Label class="material-icons" text="directions_car"></Label>
+
+  <!-- actions -->
+  <Button class="material-icons" text="share"></Button>
+  <Button class="material-icons" text="info"></Button>
+  <Button text="GO"></Button>
 </StackLayout>

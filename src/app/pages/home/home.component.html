@@ -13,8 +13,17 @@
 </ActionBar>
 
 <!-- content -->
+<ScrollView>
+  <StackLayout orientation="vertical" class="pt-56">
+    <PaceNotesSet
+      *ngFor="let paceNotesSet of paceNotesSets"
+      [paceNotesSet]="paceNotesSet"
+    ></PaceNotesSet>
+  </StackLayout>
+</ScrollView>
+
+<!-- search bar -->
 <StackLayout orientation="vertical">
-  <!-- search bar -->
   <GridLayout
     columns="auto,*,auto"
     class="bg-gray-800 rounded-sm m-x-8 m-y-16"
@@ -32,15 +41,10 @@
       class="icon-button material-icons text-icon-base text-gray-300"
     ></Button>
   </GridLayout>
-
-  <PaceNotesSet
-    *ngFor="let paceNotesSet of paceNotesSets"
-    [paceNotesSet]="paceNotesSet"
-  ></PaceNotesSet>
 </StackLayout>
 
-<!-- no content-->
-<StackLayout orientation="horizontal">
+<!-- no content -->
+<StackLayout *ngIf="paceNotesSets.length === 0" orientation="horizontal">
   <GridLayout rows="auto, auto" verticalAlignment="center">
     <Label
       row="0"
